@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NibulonUrkPosta", "NibulonUrkPosta\NibulonUrkPosta.csproj", "{22BCE499-D02D-4021-A93C-3EA23B92F2E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22BCE499-D02D-4021-A93C-3EA23B92F2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22BCE499-D02D-4021-A93C-3EA23B92F2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22BCE499-D02D-4021-A93C-3EA23B92F2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22BCE499-D02D-4021-A93C-3EA23B92F2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

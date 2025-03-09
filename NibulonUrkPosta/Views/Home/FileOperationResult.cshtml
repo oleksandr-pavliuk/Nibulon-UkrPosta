@@ -1,0 +1,14 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model NibulonUrkPosta.Models.Home.ImportResultViewModel
+
+@{
+    ViewData["Title"] = Model.IsSuccess ? "Успішно" : "Проблема при роботі з файлами";
+    Layout = "_Layout";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>@Model.Message</p>
+
+<a asp-action="Index" class="btn btn-primary">
+    @(Model.IsSuccess ? "Перейти до головної" : "Спробувати знову")
+</a>

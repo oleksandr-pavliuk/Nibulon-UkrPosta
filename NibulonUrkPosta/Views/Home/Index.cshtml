@@ -1,0 +1,35 @@
+﻿@{
+ViewData["Title"] = "Головна";
+Layout = "_Layout";
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Імпорт даних</h2>
+        <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="ImportExcel" onsubmit="showLoading()">
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="excelFile" name="file" accept=".xlsx,.xls" required>
+                </div>
+            </div>
+            <br/>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" id="uploadBtn">Імпортувати</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="col-md-6">
+        <h2>Експорт даних</h2>
+        <div class="form-group">
+            <a href="@Url.Action("ExportExcel", "Home")" class="btn btn-success">Завантажити Excel файл</a>
+        </div>
+    </div>
+</div>
+
+<div id="loadingOverlay" class="loading-overlay d-none">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Завантаження...</span>
+    </div>
+    <p>Імпорт триває, будь ласка, зачекайте...</p>
+</div>

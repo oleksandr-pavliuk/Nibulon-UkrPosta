@@ -1,0 +1,118 @@
+﻿@model AupFilterViewModel
+
+@{
+ViewData["Title"] = "Фільтрація поштових індексів";
+Layout = "_Layout";
+}
+
+<h2 class="text-center my-4">@ViewData["Title"]</h2>
+
+<div class="container">
+    <div class="card shadow-lg p-4">
+        <form method="get">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label">Поштовий індекс:</label>
+                    <input type="text" name="postCode" value="@Model.PostCode" class="form-control" placeholder="Введіть поштовий індекс" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Місто:</label>
+                    <input type="text" name="cityName" class="form-control" placeholder="Введіть місто" />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Район:</label>
+                    <select name="districtId" class="form-select">
+                        <option value="">Оберіть район</option>
+                        @foreach (var district in Model.Districts)
+                        {
+                        <option value="@district.Id" selected="@(district.Id == Model.DistrictId)">@district.DistrictName</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label">Область:</label>
+                    <select name="regionId" class="form-select">
+                        <option value="">Оберіть область</option>
+                        @foreach (var region in Model.Regions)
+                        {
+                        <option value="@region.Id" selected="@(region.Id == Model.RegionId)">@region.RegionName</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary px-4">Знайти</button>
+                <a href="/aup/filtering" class="btn btn-secondary px-4">Оновити фільтри</a>
+            </div>
+        </form>
+    </div>
+
+    @if (Model.PostCodes.Any())
+    {
+    <div class="mt-5">
+        <div class="card shadow-lg">
+            <div class="card-body">
+                <h5 class="card-title text-center">Результати</h5>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Поштовий індекс</th>
+                        <th>Місто</th>
+                        <th>Район</th>
+                        <th>Область</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var record in Model.PostCodes)
+                    {
+                        <tr>
+                            <td>@record.PostIndexCode</td>
+                            <td>@record.CityName</td>
+                            <td>@record.DistrictName</td>
+                            <td>@record.RegionName</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+                @if (Model.TotalPages > 1)
+                {
+                    <div class="d-flex justify-content-center d-inline mt-3">
+                        <p class="d-inline me-3">Поточна сторінка: @Model.CurrentPage</p>
+                       
+                        @if (Model.CurrentPage > 1)
+                        {
+                            <a asp-action="Filtering" asp-route-page="@(Model.CurrentPage - 1)"
+                               asp-route-PostCode="@Model.PostCode"
+                               asp-route-CityName="@Model.CityName"
+                               asp-route-DistrictId="@Model.DistrictId"
+                               asp-route-RegionId="@Model.RegionId"
+                               class="btn btn-primary me-2">Попередня</a>
+                        }
+                        <br/>
+                        @if (Model.CurrentPage < Model.TotalPages)
+                        {
+                            <a asp-action="Filtering" asp-route-page="@(Model.CurrentPage + 1)"
+                               asp-route-PostCode="@Model.PostCode"
+                               asp-route-CityName="@Model.CityName"
+                               asp-route-DistrictId="@Model.DistrictId"
+                               asp-route-RegionId="@Model.RegionId"
+                               class="btn btn-primary">Далі</a>
+                        }
+                        <p class="d-inline ms-3">Всього сторінок: @Model.TotalPages</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="text-center mt-4">
+        <p class="text-muted">Не знайдено.</p>
+    </div>
+    }
+</div>
