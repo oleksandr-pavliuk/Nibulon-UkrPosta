@@ -21,7 +21,7 @@ public class AupService(ApplicationDbContext context) : IAupService
     {
         try
         {
-            var records = context.PostIndexes.Select(e => new PostIndex()
+            var records = context.PostIndexes.AsNoTracking().Select(e => new PostIndex()
             {
                 PostIndexCode = e.PostIndexCode,
                 CityName = e.CityName,
@@ -58,7 +58,7 @@ public class AupService(ApplicationDbContext context) : IAupService
                 query = query.Where(r => r.RegionId == model.RegionId);
 
             int totalRecords = await query.CountAsync();
-            var records = await query.Skip((page-1) * pageSize).Take(pageSize).ToListAsync();
+            var records = await query.Skip((page-1) * pageSize).Take(pageSize).AsNoTracking().ToListAsync();
 
             var viewModel = new AupFilterViewModel
             {
@@ -66,8 +66,8 @@ public class AupService(ApplicationDbContext context) : IAupService
                 CityName = model.CityName,
                 DistrictId = model.DistrictId,
                 RegionId = model.RegionId,
-                Districts = await context.Districts.OrderBy(x => x.DistrictName).ToListAsync(),
-                Regions = await context.Regions.OrderBy(x => x.RegionName).ToListAsync(),
+                Districts = await context.Districts.AsNoTracking().OrderBy(x => x.DistrictName).ToListAsync(),
+                Regions = await context.Regions.AsNoTracking().OrderBy(x => x.RegionName).ToListAsync(),
                 PostCodes = records,
                 CurrentPage = (uint)page,
                 TotalPages = (uint)Math.Ceiling((double)totalRecords / pageSize)
