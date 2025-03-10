@@ -1,6 +1,6 @@
-﻿namespace NibulonUrkPosta.Models;
+﻿namespace NibulonUrkPosta.Dtos;
 
-public class ExcelAupModel
+public class ExcelAupDto
 {
     public string? Region { get; set; }
     public string? OldDistrict { get; set; }

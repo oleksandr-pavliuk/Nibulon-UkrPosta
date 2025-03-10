@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace NibulonUrkPosta.Controllers;
+﻿namespace NibulonUrkPosta.Controllers;
 
 public class AupController(ILogger<AupController> logger, IAupService aupService) : Controller
 {

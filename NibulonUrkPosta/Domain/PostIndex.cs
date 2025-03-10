@@ -1,4 +1,4 @@
-﻿namespace NibulonUrkPosta.Models.Aup;
+﻿namespace NibulonUrkPosta.Domain;
 
 public class PostIndex
 {

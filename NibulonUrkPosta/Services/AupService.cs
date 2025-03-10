@@ -161,7 +161,7 @@ public class AupService(ApplicationDbContext context) : IAupService
         return cell;
     }
 
-    private async Task<bool> UploadToDatabaseAsync(List<ExcelAupModel> excelData)
+    private async Task<bool> UploadToDatabaseAsync(List<ExcelAupDto> excelData)
     {
         try
         {
@@ -236,12 +236,12 @@ public class AupService(ApplicationDbContext context) : IAupService
         }
     }
 
-    private async Task<List<ExcelAupModel>> GetDataFromExcelAsync(IFormFile file)
+    private async Task<List<ExcelAupDto>> GetDataFromExcelAsync(IFormFile file)
     {
         if (file == null || file.Length == 0)
             throw new NoFileSelectedException("File not selected");
 
-        var dataList = new List<ExcelAupModel>();
+        var dataList = new List<ExcelAupDto>();
 
         try
         {
@@ -266,7 +266,7 @@ public class AupService(ApplicationDbContext context) : IAupService
 
                             if (i >= 2)
                             {
-                                var excelRow = new ExcelAupModel()
+                                var excelRow = new ExcelAupDto()
                                 {
                                     Region = reader.GetValue(1).ToString(),
                                     OldDistrict = (reader.GetValue(2) is null)
